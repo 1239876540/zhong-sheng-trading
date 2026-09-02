@@ -1,0 +1,26 @@
+# Zhong Sheng Trading · 马达加斯加中盛贸易有限公司
+# SEO: 允许所有主流搜索引擎抓取，sitemap 指向主页
+User-agent: *
+Allow: /
+Disallow:
+
+# 官方站点 canonical，请按实际部署域名替换
+Sitemap: https://zhongsheng-mg.com/sitemap.xml
+
+# 常见蜘蛛 UA（百度 / 搜狗 / 360 / 神马 / 字节 / Bing / Google）均允许
+User-agent: Baiduspider
+Allow: /
+User-agent: 360Spider
+Allow: /
+User-agent: Sogou web spider
+Allow: /
+User-agent: Yisouspider
+Allow: /
+User-agent: Bytespider
+Allow: /
+User-agent: bingbot
+Allow: /
+User-agent: Googlebot
+Allow: /
+User-agent: Googlebot-Image
+Allow: /

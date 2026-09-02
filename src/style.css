@@ -1,0 +1,766 @@
+@import "tailwindcss";
+/* =========================================================================
+   字体加载策略（为了 Vite 构建不解析绝对路径，避免 Can't resolve '/fonts/fonts.css'）
+   · Fraunces 900 → display 衬线主标题（"中盛贸易"、section 大标题、价格数字）
+   · Sora 400/700/800 → 正文、导航、按钮
+   · CJK 中文字体通过 index.html 的 Google CDN 加载，若 ORB 拦截则系统字体自动降级
+   · 所有字体实际从 index.html 的 <link rel="stylesheet" href="/fonts/fonts.css"> 加载，
+     这里不再重复 @import，避免 Vite/Rolldown enhanced-resolve 抛错。
+   ========================================================================= */
+
+@theme {
+  /* 工业贸易风配色 */
+  --color-ink-900: #0F1A2D;       /* 深藏青 - 主字 */
+  --color-ink-800: #1C2A46;
+  --color-ink-700: #2B3D5E;
+  --color-ink-600: #405577;
+  --color-ink-500: #5E7497;
+  --color-ink-400: #8EA0BC;
+  --color-ink-300: #BFCBE0;
+  --color-ink-200: #DDE4F0;
+  --color-ink-100: #EEF1F8;
+  --color-ink-50:  #F6F8FC;
+
+  --color-amber-500: #E8A400;   /* 徐工黄 主强调 */
+  --color-amber-600: #CF8F00;
+  --color-amber-100: #FEF2CD;
+  --color-amber-50:  #FFF9E6;
+
+  --color-warm: #F5F2EC;         /* 纸面暖灰 - 背景 */
+  --color-warm-2: #EDE7DA;
+  --color-cream: #FBF8F1;
+
+  --color-success: #1F7A3D;
+  --color-danger:  #B0322C;
+
+  /* 快捷语义 */
+  --color-primary: var(--color-ink-800);
+  --color-primary-light: var(--color-ink-600);
+  --color-primary-dark: var(--color-ink-900);
+  --color-secondary: var(--color-ink-500);
+  --color-secondary-light: var(--color-ink-300);
+  --color-accent: var(--color-amber-500);
+  --color-bg-soft: var(--color-warm);
+  --color-bg-dark: var(--color-ink-900);
+
+  --font-display: "Fraunces", "Noto Serif SC", "Songti SC", "Source Han Serif", "SimSun", serif;
+  --font-sans: "Sora", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", system-ui, -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", "Fira Code", ui-monospace, monospace;
+
+  /* 玻璃 / 阴影层级 */
+  --glass-bg: rgba(255, 255, 255, 0.55);
+  --glass-bg-dark: rgba(15, 26, 45, 0.55);
+  --glass-border: rgba(255, 255, 255, 0.35);
+  --glass-border-dark: rgba(255, 255, 255, 0.12);
+  --shadow-xs: 0 1px 2px rgba(15,26,45,0.05);
+  --shadow-sm: 0 4px 12px -6px rgba(15,26,45,0.12);
+  --shadow-md: 0 12px 28px -10px rgba(15,26,45,0.18);
+  --shadow-lg: 0 30px 60px -18px rgba(15,26,45,0.28);
+  --shadow-xl: 0 50px 100px -20px rgba(15,26,45,0.32);
+  --shadow-amber: 0 20px 50px -15px rgba(232,164,0,0.55);
+
+  /* 半径 */
+  --r-pill: 9999px;
+  --r-card: 22px;
+  --r-bento: 28px;
+  --r-huge: 36px;
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: var(--color-ink-900);
+  background-color: var(--color-warm);
+  overflow-x: hidden;
+  background-image:
+    /* 右上角琥珀聚光 mesh */
+    radial-gradient(1400px 700px at 85% -20%, rgba(232,164,0,0.14), rgba(232,164,0,0.06) 35%, transparent 60%),
+    /* 中部藏青 mesh 球 */
+    radial-gradient(900px 700px at 15% 20%, rgba(64,85,119,0.10), transparent 60%),
+    /* 底部暖色 */
+    radial-gradient(1100px 600px at 60% 110%, rgba(232,164,0,0.10), transparent 55%),
+    /* 纸面细颗粒（加一倍强度，肉眼可见） */
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.14  0 0 0 0 0.20  0 0 0 0 0.30  0 0 0 0.06 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  letter-spacing: -0.005em;
+  line-height: 1.6;
+  max-width: 100vw;
+}
+
+/* 全局防水平溢出（超大编号等装饰元素） */
+body > div#root { overflow-x: hidden; max-width: 100vw; position: relative; }
+/* body::before = 工业经纬线（港航坐标网 / container 蓝图感 · 固定全屏） */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.55;
+  mix-blend-mode: multiply;
+  background-image:
+    /* 40px 细虚线经纬网（ink-900 1% 极淡） */
+    linear-gradient(to right, rgba(15,26,45,0.045) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(15,26,45,0.045) 1px, transparent 1px),
+    /* 每 200px 一条加粗"主坐标线"，像蓝图里的基准线 */
+    linear-gradient(to right, rgba(15,26,45,0.09) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(15,26,45,0.09) 1px, transparent 1px);
+  background-size:
+    40px 40px,
+    40px 40px,
+    200px 200px,
+    200px 200px;
+  mask-image: radial-gradient(ellipse 120% 90% at 50% 50%, #000 55%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 120% 90% at 50% 50%, #000 55%, transparent 100%);
+}
+/* body::after = 琥珀港桥灯 + 藏青货轮晕 · 缓慢呼吸漂移（prefers-reduced-motion 会被下面关闭） */
+body::after {
+  content: "";
+  position: fixed;
+  inset: -15% -10% -10% -15%;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.85;
+  mix-blend-mode: soft-light;
+  background:
+    radial-gradient(700px 420px at 92% 8%,
+      rgba(232,164,0,0.55) 0%,
+      rgba(232,164,0,0.28) 25%,
+      rgba(232,164,0,0.10) 45%,
+      transparent 70%),
+    radial-gradient(540px 360px at 6% 88%,
+      rgba(64,85,119,0.55) 0%,
+      rgba(64,85,119,0.25) 30%,
+      rgba(64,85,119,0.10) 55%,
+      transparent 72%),
+    radial-gradient(460px 300px at 38% 42%,
+      rgba(232,164,0,0.22) 0%,
+      rgba(232,164,0,0.08) 40%,
+      transparent 72%);
+  filter: blur(14px) saturate(1.12);
+  animation: bgMeshDrift 22s ease-in-out infinite alternate;
+}
+@keyframes bgMeshDrift {
+  0%   { transform: translate3d(0,0,0)       scale(1);    }
+  50%  { transform: translate3d(1.2%,-0.8%,0) scale(1.03); }
+  100% { transform: translate3d(-1%,1.1%,0)   scale(1.05); }
+}
+/* 让 body 下所有内容层级高于装饰层（::before / ::after） */
+body > div#root > *,
+body > div#root > Navbar /* 兜底，不会命中 React 元素名只是保险 */ { position: relative; z-index: 1; }
+
+/* ———————— 背景高级工具类：供浅色 section 使用 ———————— */
+/* 蓝图角规标尺（贴 section 4 个角落的小刻度，体现工业精密感） */
+.bg-corners {
+  position: relative;
+}
+.bg-corners::before,
+.bg-corners::after {
+  content: "";
+  position: absolute;
+  width: 72px;
+  height: 72px;
+  pointer-events: none;
+  opacity: 0.55;
+  z-index: 0;
+}
+.bg-corners::before {
+  top: 16px;
+  left: 16px;
+  border-top: 1.5px solid rgba(15,26,45,0.35);
+  border-left: 1.5px solid rgba(15,26,45,0.35);
+  background:
+    linear-gradient(90deg, rgba(232,164,0,0.7) 0 24px, transparent 24px) top left / 24px 3px no-repeat,
+    linear-gradient(0deg,  rgba(232,164,0,0.7) 0 24px, transparent 24px) top left / 3px 24px no-repeat;
+}
+.bg-corners::after {
+  bottom: 16px;
+  right: 16px;
+  border-bottom: 1.5px solid rgba(15,26,45,0.35);
+  border-right: 1.5px solid rgba(15,26,45,0.35);
+  background:
+    linear-gradient(270deg, rgba(232,164,0,0.7) 0 24px, transparent 24px) bottom right / 24px 3px no-repeat,
+    linear-gradient(0deg,   rgba(232,164,0,0.7) 0 24px, transparent 24px) bottom right / 3px 24px no-repeat;
+}
+@media (max-width: 767px) {
+  .bg-corners::before,
+  .bg-corners::after { width: 48px; height: 48px; }
+}
+
+/* 货轮航迹纹（section 背景用，一条细长琥珀虚线从左下到右上，像港口船尾迹
+   —— 用 linear-gradient + repeating-linear-gradient 合成 SVG 感 60° 虚线） */
+.bg-wake {
+  position: relative;
+  overflow: hidden;
+}
+.bg-wake::before {
+  content: "";
+  position: absolute;
+  inset: -20%;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.42;
+  background-image:
+    repeating-linear-gradient(
+      -17deg,
+      transparent 0 14px,
+      rgba(232,164,0,0.42) 14px 17px, /* 琥珀虚线实部 3px */
+      transparent 17px 30px
+    );
+  -webkit-mask-image: radial-gradient(ellipse 90% 60% at 50% 60%, #000 30%, transparent 82%);
+          mask-image: radial-gradient(ellipse 90% 60% at 50% 60%, #000 30%, transparent 82%);
+  mix-blend-mode: multiply;
+}
+
+/* 防伪/品牌暗纹（极淡的"ZS·中盛"水印，像纸币防伪纹，凑近才看得清，避免被感知为"滚动条/跑马灯"） */
+.bg-brand-tessellation {
+  position: relative;
+}
+.bg-brand-tessellation::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.032;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='260' height='130' viewBox='0 0 260 130'><g fill='%230F1A2D' font-family='Fraunces,Noto Serif SC,serif' font-weight='800'><text x='14' y='30' font-size='13' letter-spacing='4'>ZS · 中盛贸易</text><text x='124' y='70' font-size='10' fill='%23E8A400' opacity='0.9' letter-spacing='3.5' font-family='JetBrains Mono,ui-monospace,monospace'>ZHONGSHENG TRADING</text><text x='52' y='114' font-size='13' letter-spacing='4'>ZS · ZHONGSHENG</text></g></svg>");
+  background-size: 260px 130px;
+  background-repeat: repeat;
+  transform: rotate(-4deg);
+  mix-blend-mode: multiply;
+}
+section { max-width: 100vw; overflow-x: hidden; }
+
+/* 首字母下沉 drop cap（About 公司介绍第一段用） */
+.dropcap::first-letter {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 4.2rem;
+  line-height: 0.85;
+  float: left;
+  margin-right: 0.5rem;
+  color: var(--color-amber-500);
+  letter-spacing: -0.03em;
+  padding-top: 0.35rem;
+}
+@media (min-width: 768px) {
+  .dropcap::first-letter { font-size: 5.5rem; margin-right: 0.75rem; }
+}
+
+/* ::selection 合并（下方 L618-L625 有完整版含 ::-moz-selection，此处占位避免重复） */
+/* 常用显示字体 */
+.font-display { font-family: var(--font-display); letter-spacing: -0.02em; }
+
+/* 分隔粗线条 */
+.hr-heavy {
+  height: 3px;
+  background: linear-gradient(90deg, var(--color-ink-900) 0%, var(--color-ink-900) 30%, var(--color-amber-500) 30%, var(--color-amber-500) 50%, transparent 50%);
+  width: 120px;
+  display: block;
+}
+
+/* 纸面卡片 */
+.card-paper {
+  background: var(--color-cream);
+  border: 1px solid var(--color-ink-200);
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.9) inset,
+    0 1px 2px rgba(15,26,45,0.05),
+    0 6px 24px -8px rgba(15,26,45,0.08);
+}
+
+/* 黄底价格 tag */
+.price-tag {
+  background: var(--color-amber-500);
+  color: var(--color-ink-900);
+  font-weight: 800;
+  padding: 6px 14px;
+  clip-path: polygon(0 0, 100% 0, 96% 100%, 0 100%);
+  display: inline-block;
+}
+
+/* 藏青徽章 */
+.badge-ink {
+  background: var(--color-ink-900);
+  color: #fff;
+  padding: 4px 12px;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  border-radius: 2px;
+  font-weight: 700;
+  display: inline-block;
+  text-transform: uppercase;
+}
+/* 小号印章（价格卡 / 参考价 用） */
+.badge-ink-xs {
+  background: var(--color-ink-900);
+  color: #fff;
+  padding: 3px 9px;
+  font-size: 10px !important;
+  letter-spacing: 0.1em;
+  border-radius: 2px;
+  font-weight: 800;
+  display: inline-block;
+  text-transform: uppercase;
+  box-shadow: 0 2px 8px rgba(15, 26, 45, 0.25);
+}
+
+/* 按钮统一基底（padding / radius 用 Tailwind 工具类控制，保持灵活） */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-weight: 700;
+  transition: all 0.25s ease;
+  cursor: pointer;
+  font-family: var(--font-sans);
+  white-space: nowrap;
+  border-radius: 9999px;
+  padding: 14px 28px;
+  line-height: 1.2;
+  text-decoration: none;
+  box-shadow: 0 2px 0 rgba(15,26,45,0.04);
+}
+.btn:hover { transform: translateY(-1px); box-shadow: 0 6px 20px -8px rgba(15,26,45,0.25); }
+.btn:active { transform: translateY(0); }
+
+.btn-primary {
+  background: var(--color-ink-900);
+  color: #fff;
+  border: 1.5px solid var(--color-ink-900);
+}
+.btn-primary:hover { background: #0a1324; border-color: #0a1324; color: #fff; }
+
+.btn-amber {
+  background: var(--color-amber-500);
+  color: var(--color-ink-900);
+  border: 1.5px solid var(--color-amber-500);
+}
+.btn-amber:hover { background: #d39400; border-color: #d39400; color: var(--color-ink-900); }
+
+.btn-outline {
+  background: transparent;
+  color: var(--color-ink-900);
+  border: 1.5px solid var(--color-ink-900);
+}
+.btn-outline:hover { background: var(--color-ink-900); color: #fff; border-color: var(--color-ink-900); }
+
+/* 图片边框 */
+.img-frame {
+  border: 1px solid var(--color-ink-900);
+  padding: 6px;
+  background: #fff;
+  box-shadow: 4px 4px 0 var(--color-amber-500);
+}
+
+/* 浮动：大图 slow pan */
+@keyframes slowPan {
+  0%   { transform: scale(1.05) translate(0, 0); }
+  50%  { transform: scale(1.10) translate(-1%, -1%); }
+  100% { transform: scale(1.05) translate(0, 0); }
+}
+.slow-pan { animation: slowPan 18s ease-in-out infinite; }
+
+/* 垂直数字 */
+.vertical-number {
+  font-family: var(--font-display);
+  writing-mode: vertical-rl;
+  letter-spacing: 0.4em;
+  font-weight: 800;
+}
+
+/* focus outline */
+:focus-visible {
+  outline: 2px solid var(--color-amber-500);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* ================================================================ */
+/*  新增 · 高级感 & 酷炫 工具类                                      */
+/* ================================================================ */
+
+/* --- Mesh 背景（section 直接叠 class） --- */
+.bg-mesh-warm {
+  background-image:
+    radial-gradient(900px 600px at 90% 0%, rgba(232,164,0,0.18), transparent 55%),
+    radial-gradient(700px 500px at 0% 100%, rgba(64,85,119,0.14), transparent 55%);
+}
+.bg-mesh-ink {
+  background-image:
+    radial-gradient(900px 600px at 80% 20%, rgba(232,164,0,0.18), transparent 55%),
+    radial-gradient(700px 500px at 20% 110%, rgba(255,255,255,0.06), transparent 55%);
+}
+.bg-grain-overlay::after {
+  content: "";
+  position: absolute; inset: 0; pointer-events: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.97  0 0 0 0 0.97  0 0 0 0 0.97  0 0 0 0.08 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  mix-blend-mode: overlay; opacity: 0.5;
+}
+
+/* --- Glass cards（毛玻璃） --- */
+.glass-light {
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--shadow-md), inset 0 1px 0 rgba(255,255,255,0.9);
+}
+.glass-dark {
+  background: var(--glass-bg-dark);
+  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  border: 1px solid var(--glass-border-dark);
+  box-shadow: var(--shadow-lg);
+}
+.glass-nav {
+  background: rgba(15, 26, 45, 0.72);
+  backdrop-filter: blur(14px) saturate(150%);
+  -webkit-backdrop-filter: blur(14px) saturate(150%);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 12px 40px -16px rgba(15,26,45,0.45);
+}
+
+/* --- Card 悬浮 + 光泽扫过 shine overlay（配合 .shine 使用） --- */
+.tilt-lift {
+  position: relative;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  transition: transform .45s cubic-bezier(.2,.7,.2,1), box-shadow .45s cubic-bezier(.2,.7,.2,1), border-color .3s;
+  will-change: transform;
+}
+.tilt-lift::after {
+  content: "";
+  position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
+  background: linear-gradient(115deg,
+      transparent 20%,
+      rgba(255,255,255,0.28) 42%,
+      rgba(255,255,255,0.55) 50%,
+      rgba(255,255,255,0.28) 58%,
+      transparent 80%);
+  background-size: 200% 200%;
+  background-position: 160% 160%;
+  mix-blend-mode: overlay;
+  transition: background-position .9s ease;
+  opacity: 0;
+}
+.tilt-lift:hover {
+  transform: translateY(-6px) rotateX(.4deg) rotateY(-.6deg) scale(1.005);
+  box-shadow: var(--shadow-xl), 0 0 0 1px rgba(232,164,0,0.35) inset;
+}
+.tilt-lift:hover::after {
+  opacity: 1;
+  background-position: -60% -60%;
+}
+
+/* shine 通用（扫光层）—— 非伪冲突时加在 card 内 div 上 */
+.shine-sweep {
+  position: relative;
+  overflow: hidden;
+}
+.shine-sweep::before {
+  content: "";
+  position: absolute; top: 0; bottom: 0; left: -40%; width: 50%;
+  background: linear-gradient(90deg,
+      transparent 0%,
+      rgba(255,255,255,0.22) 50%,
+      transparent 100%);
+  transform: skewX(-20deg);
+  transition: left .8s ease;
+}
+.shine-sweep:hover::before { left: 120%; }
+
+/* --- Nav 链接下划线滑动动效 --- */
+.nav-item {
+  position: relative;
+  display: inline-flex;
+  padding: 6px 2px;
+  transition: color .2s ease;
+}
+.nav-item::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 100%; bottom: -2px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--color-amber-500), #FFD362);
+  border-radius: 2px;
+  transition: right .35s cubic-bezier(.2,.7,.2,1);
+}
+.nav-item:hover::after,
+.nav-item.is-active::after { right: 0; }
+
+/* --- 按钮点按 Ripple（用 JS 追加点击坐标 --rx/--ry；没加时做简化 pulse 替代） --- */
+.btn-ripple { position: relative; overflow: hidden; isolation: isolate; }
+.btn-ripple::after {
+  content: "";
+  position: absolute;
+  left: var(--rx, 50%);
+  top: var(--ry, 50%);
+  width: 0; height: 0;
+  border-radius: 9999px;
+  background: rgba(255,255,255,0.55);
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  pointer-events: none;
+}
+.btn-ripple:active::after {
+  animation: ripple .55s ease-out forwards;
+}
+@keyframes ripple {
+  0%   { opacity: 0.55; width: 0; height: 0; }
+  100% { opacity: 0;    width: 260px; height: 260px; }
+}
+
+/* --- 更多动画 --- */
+@keyframes floatY {
+  0%,100% { transform: translateY(0); }
+  50%     { transform: translateY(-8px); }
+}
+.float-y { animation: floatY 6s ease-in-out infinite; }
+
+@keyframes pulseRing {
+  0%   { box-shadow: 0 0 0 0 rgba(232,164,0,0.55); }
+  70%  { box-shadow: 0 0 0 18px rgba(232,164,0,0); }
+  100% { box-shadow: 0 0 0 0 rgba(232,164,0,0); }
+}
+.pulse-ring { animation: pulseRing 2.4s cubic-bezier(.4,0,.6,1) infinite; }
+
+@keyframes marqueeX {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.marquee {
+  display: flex;
+  width: max-content;
+  animation: marqueeX 40s linear infinite;
+  will-change: transform;
+}
+
+/* --- Hero 数据计数器 --- */
+.hero-counter {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-variation-settings: "opsz" 144, "SOFT" 50;
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums lining-nums;
+  line-height: 0.95;
+}
+
+/* --- 工业分隔符：虚线 + 琥珀段 --- */
+.divider-industrial {
+  display: flex; align-items: center; gap: 12px;
+}
+.divider-industrial::before,
+.divider-industrial::after {
+  content: ""; flex: 1; height: 1px;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--color-ink-900) 0 8px,
+    transparent 8px 14px
+  );
+  opacity: 0.35;
+}
+.divider-industrial > .dot {
+  width: 10px; height: 10px; border-radius: 9999px;
+  background: var(--color-amber-500);
+  box-shadow: 0 0 0 4px rgba(232,164,0,0.15);
+}
+
+/* --- 数据进度条（库存 / 利用率 可视化） --- */
+.bar-track {
+  position: relative;
+  height: 8px; border-radius: 9999px;
+  background: rgba(15,26,45,0.08);
+  overflow: hidden;
+}
+.bar-fill {
+  position: absolute; inset: 0 auto 0 0;
+  border-radius: 9999px;
+  background: linear-gradient(90deg, var(--color-amber-500), #FFC93B);
+  box-shadow: 0 0 0 1px rgba(232,164,0,0.2) inset;
+  transition: width .8s cubic-bezier(.2,.7,.2,1);
+}
+.bar-fill.ink {
+  background: linear-gradient(90deg, var(--color-ink-900), var(--color-ink-700));
+}
+/* 注：原 .bar-fill.emerald（翠绿渐变）不再使用，全站只保留 amber / ink 两种进度色。
+   保留空类为兼容：已不再有组件引用；若未来需"次强调色"请写语义类名如 .bar-fill.alt */
+.bar-fill.alt {
+  background: linear-gradient(90deg, var(--color-ink-700), var(--color-amber-500));
+}
+
+/* --- 价格卡 + 印章 corner number（右下角大型数字水印） --- */
+.corner-number {
+  position: absolute;
+  right: 16px; bottom: 0;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(90px, 13vw, 170px);
+  line-height: 0.7;
+  letter-spacing: -0.05em;
+  color: rgba(15,26,45,0.06);
+  -webkit-user-select: none;
+  user-select: none;
+  pointer-events: none;
+}
+
+/* --- 斜切标签（替代旧 price-tag，更现代） --- */
+.chip-skew {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 5px 12px 5px 14px;
+  background: var(--color-amber-500);
+  color: var(--color-ink-900);
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  clip-path: polygon(8% 0, 100% 0, 92% 100%, 0 100%);
+}
+
+/* --- 文字阴影光泽渐变（主标题用） --- */
+.text-gradient-amber {
+  background: linear-gradient(120deg, #FFD362 0%, #E8A400 40%, #B57F00 80%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* --- 自定义细滚动条（视觉加分，不影响逻辑） --- */
+::-webkit-scrollbar { width: 11px; height: 11px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--color-amber-500), var(--color-ink-700));
+  border-radius: 9999px;
+  border: 3px solid var(--color-warm);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #FFC93B, var(--color-ink-900));
+}
+
+@media print {
+  body { background: #fff; }
+}
+
+/* ================================================================ */
+/*  A11Y · prefers-reduced-motion 全局降级（WCAG 2.2 AAA 合规）      */
+/* ================================================================ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .marquee          { animation: none !important; transform: none !important; }
+  .float-y          { animation: none !important; }
+  .pulse-ring       { animation: none !important; }
+  .tilt-lift:hover  { transform: translateY(-2px) !important; } /* 保留最小反馈 */
+  .shine-sweep::before,
+  .tilt-lift::after { transition: none !important; opacity: 0 !important; }
+}
+
+/* A11Y skip link：键盘用户 Tab 一次跳到主内容 */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 100;
+  padding: 12px 20px;
+  background: var(--color-amber-500);
+  color: var(--color-ink-900);
+  font-weight: 800;
+  border-bottom-right-radius: 14px;
+  box-shadow: var(--shadow-md);
+}
+.skip-link:focus {
+  left: 0;
+  outline: none;
+}
+
+/* ================================================================ */
+/*  Navbar 对比度修复（scrolled 后 nav 文字 ≥ 4.5:1 AA）              */
+/* ================================================================ */
+/* scrolled 后 glass-nav 背景是 rgba(15,26,45,0.72) — 确保导航文字
+   在玻璃 blur 下对比度 ≥ 4.5:1，同时 hover 时高亮 amber。
+   旧: text-white/75 ≈ 3.1:1 → 改为 text-white/90 再补 1px 文字阴影 */
+.glass-nav a.nav-item:not(.is-active) {
+  color: rgba(255, 255, 255, 0.92) !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+}
+.glass-nav a.nav-item:not(.is-active):hover {
+  color: var(--color-amber-500) !important;
+}
+/* 语言 pill 修复：scrolled 下按钮 11px 字 ≥ AA 18pt 大字规则 3:1，小字号补阴影 */
+.glass-nav button[aria-label*="中文"],
+.glass-nav button[aria-label*="Français"],
+.glass-nav button[aria-label*="语言"],
+.glass-nav .lang-btn {
+  color: rgba(255, 255, 255, 0.95) !important;
+}
+
+/* ================================================================ */
+/*  图片性能 / 可访问性默认值：所有非首屏 content 图片默认 lazy +    */
+/*  装饰空 alt 时设为 presentation（屏幕读屏器跳过）                */
+/*  注：CSS 中不能直接设置 aria 属性；这里用  role="presentation"   */
+/*      标记纯装饰图，真 aria-hidden 需要在 HTML 上写。             */
+/* ================================================================ */
+img {
+  max-width: 100%;
+  height: auto;
+}
+img[alt=""],
+img:not([alt]) {
+  /* 屏幕读屏器通过 role=presentation 跳过这类装饰图 */
+  role: presentation;
+}
+
+/* ================================================================ */
+/*  锚点滚动统一偏移（Navbar 固定高 80px + 安全冗余 16px = 96px）  */
+/*  旧 Services/About: scroll-mt-24 = 96px 没问题；Home Hero 跳到    */
+/*  section 时用 scroll-margin-top: 104px 让标题不被 Navbar 遮挡     */
+/* ================================================================ */
+section[id] {
+  scroll-margin-top: 104px;
+}
+@media (max-width: 768px) {
+  /* 移动端 Navbar 矮一点（h-20 = 80px 仍成立 + 菜单 16px） */
+  section[id] {
+    scroll-margin-top: 96px;
+  }
+}
+
+/* ================================================================ */
+/*  触控目标：移动端所有按钮 ≥ 44×44px（WCAG 2.5.5 Target Size）    */
+/* ================================================================ */
+@media (pointer: coarse) {
+  button,
+  a[role="button"],
+  .btn-primary,
+  .btn-outline,
+  .btn,
+  .btn-ripple {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+/* ================================================================ */
+/*  自定义选中文本颜色（琥珀黄 + 藏青文字）· 细节酷炫                 */
+/* ================================================================ */
+::selection {
+  background: var(--color-amber-500);
+  color: var(--color-ink-900);
+}
+::-moz-selection {
+  background: var(--color-amber-500);
+  color: var(--color-ink-900);
+}

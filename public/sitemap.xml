@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Zhong Sheng Trading Sitemap · 马达加斯加中盛贸易有限公司
+  使用 HashRouter 部署到 GitHub Pages：所有页面都是基于 # 的客户端路由
+  如未来切换到 BrowserRouter + 服务端预渲染，可将 loc 路径改为真正的子路径。
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <url>
+    <loc>https://zhongsheng-mg.com/#/</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://zhongsheng-mg.com/#/?lang=zh"/>
+    <xhtml:link rel="alternate" hreflang="fr-MG" href="https://zhongsheng-mg.com/#/?lang=fr"/>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <url>
+    <loc>https://zhongsheng-mg.com/#/about</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://zhongsheng-mg.com/#/services</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://zhongsheng-mg.com/#/services#vehicles</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <url>
+    <loc>https://zhongsheng-mg.com/#/services#warehouse</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://zhongsheng-mg.com/#/services#parking</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://zhongsheng-mg.com/#/services#parts</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://zhongsheng-mg.com/#/contact</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+</urlset>
