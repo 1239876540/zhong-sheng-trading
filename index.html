@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- FAVICON · 自托管透明 PNG (32/64) + iOS 180x180 藏青底 -->
+    <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="64x64" href="./favicon.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png" />
+    <meta name="theme-color" content="#0F1A2D" />
+    <meta name="msapplication-TileColor" content="#0F1A2D" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="马达加斯加中盛贸易有限公司 - 徐工重卡XCMG、开瑞轻卡销售、仓库与停车场出租、汽车配件 | Madagascar Zhong Sheng Trade Co., Ltd. - Vente de véhicules, location d'entrepôts et parkings" />
+    <meta name="keywords" content="中盛贸易, 马达加斯加, 塔马塔夫, XCMG, 车辆销售, 仓库租赁, 停车场出租, camions, Madagascar, Toamasina, location entrepôt" />
+    <meta name="author" content="Zhong Sheng Trading" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <link rel="canonical" href="https://zhongsheng-mg.com/" />
+
+    <!-- ============== SEO · OG / Twitter / Facebook Open Graph ============== -->
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="zh_CN" />
+    <meta property="og:locale:alternate" content="fr_MG" />
+    <meta property="og:site_name" content="Zhong Sheng Trading · 中盛贸易" />
+    <meta property="og:title" content="中盛贸易 Zhong Sheng | 马达加斯加 - 徐工重卡销售 · 仓库租赁" />
+    <meta property="og:description" content="马达加斯加塔马塔夫 · 官方授权 XCMG 徐工重卡 / 开瑞轻卡销售、20000㎡ 标准仓库出租、大型停车场、汽车零配件。法语 / 中文双语服务。" />
+    <meta property="og:image" content="./company-poster-social.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Zhong Sheng Trading 中盛贸易 · 马达加斯加" />
+    <meta property="og:url" content="https://zhongsheng-mg.com/" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="中盛贸易 Zhong Sheng · 马达加斯加" />
+    <meta name="twitter:description" content="XCMG 徐工重卡 / 开瑞轻卡 / 仓库 / 停车场 / 零配件 · Toamasina Madagascar" />
+    <meta name="twitter:image" content="./company-poster-social.jpg" />
+
+    <title>中盛贸易 Zhong Sheng | 马达加斯加 - 徐工重卡销售 · 仓库租赁</title>
+
+    <!-- ============== FONTS · Self-Hosted FIRST (Fraunces + Sora, avoids ORB/CORB interception) ==============
+         策略：
+         1) /fonts/fonts.css 本地托管拉丁字体 Fraunces (display 900) + Sora (sans 400/700/800)
+            → unicode-range 切分，浏览器按需加载 ≈ 0.3 MB 总
+         2) CJK 中文字体 Noto Serif SC / Noto Sans SC 走 Google CDN，配合 preconnect + dns-prefetch
+         3) 字体回退：Fraunces → Noto Serif SC → Songti SC → SimSun；Sora → Noto Sans SC → PingFang SC → system
+         4) 全部 font-display: swap，永远不会出现 "invisible text on slow loads"
+    -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+
+    <!-- 本地托管 Fraunces + Sora（关键字体，100% 可用，ORB 拦截也不会失效） -->
+    <link rel="preload" as="style" href="./fonts/fonts.css" />
+    <link rel="stylesheet" href="./fonts/fonts.css" />
+
+    <!-- Google CDN Noto CJK（CJK only，unicode-range 切分，按需加载；若被拦截则优雅降级到系统中文字体） -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@700;900&family=Noto+Sans+SC:wght@400;500;700&display=swap"
+      rel="stylesheet" media="print" onload="this.media='all'"
+    />
+    <noscript>
+      <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@700;900&family=Noto+Sans+SC:wght@400;500;700&display=swap"
+        rel="stylesheet"
+      />
+    </noscript>
+    <script type="module" crossorigin src="./assets/index-BAhi7o1Z.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-CprmRWt9.css">
+  </head>
+  <body>
+    <div id="root"></div>
+    <noscript>
+      <div style="padding:24px;font-family:system-ui;background:#F5F2EC;color:#0F1A2D;line-height:1.7;">
+        <strong style="font-size:18px;">⚠️ 需要启用 JavaScript 才能浏览中盛贸易官网</strong><br/>
+        本站是纯前端静态站点，所有功能（导航、多语言、图片加载等）依赖 JavaScript 运行。请在浏览器设置中启用 JavaScript，然后刷新即可。<br/><br/>
+        如需联系我们：拨打电话 <a href="tel:+261386677999" style="color:#E8A400;font-weight:700;">+261 38 66 779 99</a> 或到访塔马塔夫 Toamasina 公司现场。
+      </div>
+    </noscript>
+  </body>
+</html>
