@@ -149,27 +149,27 @@ export default function Contact() {
                 </div>
 
                 <h1 className="font-display text-white font-black leading-[0.95] tracking-tight">
-                  <span className="block text-[16px] md:text-[20px] font-bold text-[color:var(--color-amber-500)] mb-3 md:mb-5 tracking-[0.22em] uppercase">
+                  <span className="block text-[12px] sm:text-[16px] md:text-[20px] font-bold text-[color:var(--color-amber-500)] mb-2 sm:mb-3 md:mb-5 tracking-[0.18em] sm:tracking-[0.22em] uppercase">
                     {lang === 'zh' ? 'TOAMASINA II · MADAGASCAR · 塔马塔夫' : 'SIÈGE : TOAMASINA II · MADAGASCAR'}
                   </span>
-                  <span className="block text-[44px] md:text-[68px] lg:text-[88px] leading-[0.98]">
+                  <span className="block text-[30px] sm:text-[44px] md:text-[68px] lg:text-[88px] leading-[0.98]">
                     {t.contactPage.title}
                   </span>
-                  <span className="block text-[36px] md:text-[50px] lg:text-[64px] text-transparent bg-clip-text mt-2"
+                  <span className="block text-[24px] sm:text-[36px] md:text-[50px] lg:text-[64px] text-transparent bg-clip-text mt-1 sm:mt-2"
                         style={{ backgroundImage: 'linear-gradient(90deg,#E8A400 0%,#F5F3EE 70%,#E8A400 100%)' }}>
                     {t.contactPage.sub}
                   </span>
                 </h1>
 
-                <p className="mt-8 md:mt-10 max-w-3xl text-[17px] md:text-[19px] leading-[1.85] text-white/80">
+                <p className="mt-5 sm:mt-8 md:mt-10 max-w-3xl text-[14px] sm:text-[17px] md:text-[19px] leading-[1.7] sm:leading-[1.85] text-white/80">
                   {t.contactPage.desc}
                 </p>
 
                 {/* 快速联系按钮组 */}
-                <div className="mt-10 md:mt-14 flex flex-wrap gap-3 md:gap-4">
+                <div className="mt-7 sm:mt-10 md:mt-14 flex flex-wrap gap-2 sm:gap-3 md:gap-4">
                   <a href={`tel:${t.contact.phones[0].tel}`}
-                     className="inline-flex items-center gap-3 px-6 md:px-8 py-3.5 md:py-4 rounded-full bg-[color:var(--color-amber-500)] text-[color:var(--color-ink-900)] font-bold hover:bg-[#FFBD1F] transition-colors shadow-xl shadow-[color:var(--color-amber-500)]/25 text-base">
-                    <PhoneCall className="w-5 h-5" />
+                     className="inline-flex items-center gap-2 sm:gap-3 px-5 sm:px-6 md:px-8 py-3 sm:py-3.5 md:py-4 rounded-full bg-[color:var(--color-amber-500)] text-[color:var(--color-ink-900)] font-bold hover:bg-[#FFBD1F] transition-colors shadow-xl shadow-[color:var(--color-amber-500)]/25 text-sm sm:text-base">
+                    <PhoneCall className="w-4 h-4 sm:w-5 sm:h-5" />
                     {t.contact.phones[0].display}
                   </a>
                   <a href="#form"
@@ -177,11 +177,11 @@ export default function Contact() {
                        e.preventDefault()
                        copy(t.contact.phones[0].tel, 'hero-tel-' + t.contact.phones[0].tel)
                      }}
-                     className="inline-flex items-center gap-3 px-6 md:px-8 py-3.5 md:py-4 rounded-full border-2 border-white/20 bg-white/5 backdrop-blur-sm text-white font-semibold hover:bg-white hover:text-[color:var(--color-ink-900)] hover:border-white transition-all text-base cursor-pointer">
-                    <Copy className="w-5 h-5" />
+                     className="inline-flex items-center gap-2 sm:gap-3 px-5 sm:px-6 md:px-8 py-3 sm:py-3.5 md:py-4 rounded-full border-2 border-white/20 bg-white/5 backdrop-blur-sm text-white font-semibold hover:bg-white hover:text-[color:var(--color-ink-900)] hover:border-white transition-all text-sm sm:text-base cursor-pointer">
+                    <Copy className="w-4 h-4 sm:w-5 sm:h-5" />
                     {copied === 'hero-tel-' + t.contact.phones[0].tel
-                      ? (lang === 'zh' ? '✓ 主电话已复制' : '✓ Téléphone copié')
-                      : (lang === 'zh' ? '复制主电话号码' : 'Copier le téléphone principal')}
+                      ? (lang === 'zh' ? '✓ 已复制' : '✓ Copié')
+                      : (lang === 'zh' ? '复制电话' : 'Copier')}
                   </a>
                 </div>
               </motion.div>
@@ -282,29 +282,29 @@ export default function Contact() {
       {/* ========================================================= */}
       {/* CONTACT GRID  四种联系方式 · 蓝图角规（正规企业联系卡）   */}
       {/* ========================================================= */}
-      <section className="py-14 md:py-20 relative bg-corners">
+      <section className="py-12 sm:py-14 md:py-20 relative bg-corners">
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-10">
 
-          <div className="flex items-end justify-between flex-wrap gap-4 mb-12 md:mb-16">
+          <div className="flex items-end justify-between flex-wrap gap-4 mb-8 sm:mb-10 md:mb-12 md:mb-16">
             <div>
               <div className="flex items-center gap-4 mb-3">
                 <span className="font-mono text-[color:var(--color-amber-500)] font-bold text-sm tracking-[0.3em]">— N° 01</span>
                 <span className="h-px w-12 md:w-20 bg-[color:var(--color-ink-900)]/30" />
               </div>
-              <h2 className="font-display text-[36px] md:text-[52px] font-black leading-[1.05] tracking-tight">
+              <h2 className="font-display text-[28px] sm:text-[36px] md:text-[52px] font-black leading-[1.05] tracking-tight">
                 {t.contactPage.wayTitle}
-                <span className="block text-base md:text-lg text-[color:var(--color-ink-900)]/50 font-sans font-medium mt-2 md:mt-3 tracking-widest">
+                <span className="block text-sm md:text-lg text-[color:var(--color-ink-900)]/50 font-sans font-medium mt-1 md:mt-2 md:mt-3 tracking-widest">
                   4 WAYS TO REACH US
                 </span>
               </h2>
-              <p className="mt-4 text-[color:var(--color-ink-900)]/60 text-[15px] md:text-base">{t.contactPage.wayDesc}</p>
+              <p className="mt-3 sm:mt-4 text-[color:var(--color-ink-900)]/60 text-[13px] sm:text-[15px] md:text-base">{t.contactPage.wayDesc}</p>
             </div>
             <div className="badge-ink hidden md:block">
               {lang === 'zh' ? '中 · 法 双 语' : 'ZH · FR'}
             </div>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-5 md:gap-6">
+          <div className="grid md:grid-cols-2 gap-4 sm:gap-5 md:gap-6">
             {groups.map((g, i) => {
               const Icon = g.icon
               const a = accentMap[g.accent]
@@ -315,7 +315,7 @@ export default function Contact() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: i * 0.05 }}
-                  className="relative group bg-white rounded-[26px] p-7 md:p-8 ring-1 ring-[color:var(--color-ink-900)]/8 hover:ring-[color:var(--color-amber-500)]/30 hover:shadow-[0_20px_60px_-20px_rgba(15,26,45,0.25)] transition-all duration-400 overflow-hidden"
+                  className="relative group bg-white rounded-[20px] sm:rounded-[26px] p-5 sm:p-6 md:p-7 md:p-8 ring-1 ring-[color:var(--color-ink-900)]/8 hover:ring-[color:var(--color-amber-500)]/30 hover:shadow-[0_20px_60px_-20px_rgba(15,26,45,0.25)] transition-all duration-400 overflow-hidden"
                 >
                   {/* 背景装饰 */}
                   <div className="absolute top-0 right-0 w-40 h-40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"

@@ -68,24 +68,24 @@ export default function Services() {
                 </div>
 
                 <h1 className="font-display text-white font-black leading-[0.95] tracking-tight">
-                  <span className="block text-[16px] md:text-[20px] font-bold text-[color:var(--color-amber-500)] mb-3 md:mb-5 tracking-[0.22em] uppercase">
+                  <span className="block text-[12px] sm:text-[16px] md:text-[20px] font-bold text-[color:var(--color-amber-500)] mb-2 sm:mb-3 md:mb-5 tracking-[0.18em] sm:tracking-[0.22em] uppercase">
                     {lang === 'zh' ? '整车 · 仓储 · 配件 · 停车 —— 一站式工业服务商' : 'VÉHICULES · ENTREPÔTS · PIÈCES · PARKING'}
                   </span>
-                  <span className="block text-[44px] md:text-[68px] lg:text-[88px] leading-[0.98]">
+                  <span className="block text-[30px] sm:text-[44px] md:text-[68px] lg:text-[88px] leading-[0.98]">
                     {t.servicesPage.title}
                   </span>
-                  <span className="block text-[36px] md:text-[54px] lg:text-[70px] text-transparent bg-clip-text mt-2"
+                  <span className="block text-[24px] sm:text-[36px] md:text-[54px] lg:text-[70px] text-transparent bg-clip-text mt-1 sm:mt-2"
                         style={{ backgroundImage: 'linear-gradient(90deg,#E8A400 0%,#F5F3EE 70%,#E8A400 100%)' }}>
                     {t.servicesPage.sub}
                   </span>
                 </h1>
 
-                <p className="mt-8 md:mt-10 max-w-3xl text-[17px] md:text-[19px] leading-[1.85] text-white/80">
+                <p className="mt-5 sm:mt-8 md:mt-10 max-w-3xl text-[14px] sm:text-[17px] md:text-[19px] leading-[1.7] sm:leading-[1.85] text-white/80">
                   {t.servicesPage.desc}
                 </p>
 
                 {/* 导航胶囊 */}
-                <div className="mt-10 md:mt-14 flex flex-wrap gap-3">
+                <div className="mt-7 sm:mt-10 md:mt-14 flex flex-wrap gap-2 sm:gap-3">
                   {[
                     ['#vehicles', t.home.services[0].title],
                     ['#warehouse', t.home.services[1].title],
@@ -112,30 +112,30 @@ export default function Services() {
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-10">
 
           {/* Section Title */}
-          <div className="flex items-end justify-between flex-wrap gap-4 mb-14 md:mb-20">
+          <div className="flex items-end justify-between flex-wrap gap-4 mb-8 sm:mb-10 md:mb-14 md:mb-20">
             <div>
               <div className="flex items-center gap-4 mb-3">
                 <span className="font-mono text-[color:var(--color-amber-500)] font-bold text-sm tracking-[0.3em]">— N° 01</span>
                 <span className="h-px w-12 md:w-20 bg-[color:var(--color-ink-900)]/30" />
               </div>
-              <h2 className="font-display text-[36px] md:text-[56px] font-black leading-[1.05] tracking-tight">
+              <h2 className="font-display text-[28px] sm:text-[36px] md:text-[56px] font-black leading-[1.05] tracking-tight">
                 {t.servicesPage.vehicleSection}
-                <span className="block text-base md:text-lg text-[color:var(--color-ink-900)]/50 font-sans font-medium mt-2 md:mt-3 tracking-widest">
+                <span className="block text-sm md:text-lg text-[color:var(--color-ink-900)]/50 font-sans font-medium mt-1 md:mt-2 md:mt-3 tracking-widest">
                   HEAVY DUTY · LIGHT DUTY · ALL MODELS IN STOCK
                 </span>
               </h2>
-              <p className="mt-5 text-[color:var(--color-ink-900)]/60 max-w-2xl text-[15px] md:text-base">
+              <p className="mt-3 sm:mt-5 text-[color:var(--color-ink-900)]/60 max-w-2xl text-[13px] sm:text-[15px] md:text-base">
                 {t.servicesPage.vehicleSectionSub}
               </p>
             </div>
-            <div className="flex items-center gap-3">
-              <div className="badge-ink">XCMG · 徐工</div>
-              <div className="badge-ink !border-[color:var(--color-ink-900)] !text-[color:var(--color-ink-900)] bg-transparent">KARRY · 开瑞</div>
+            <div className="flex items-center gap-2 sm:gap-3">
+              <div className="badge-ink text-[10px] sm:text-xs">XCMG · 徐工</div>
+              <div className="badge-ink !border-[color:var(--color-ink-900)] !text-[color:var(--color-ink-900)] bg-transparent text-[10px] sm:text-xs">KARRY · 开瑞</div>
             </div>
           </div>
 
           {/* 车型列表 */}
-          <div className="space-y-20 md:space-y-28">
+          <div className="space-y-12 sm:space-y-16 md:space-y-20 md:space-y-28">
             {vehicles.map((v, i) => {
               const info = vInfo(v.id)
               const reverse = i % 2 === 1
@@ -153,13 +153,13 @@ export default function Services() {
                     {v.no}
                   </div>
 
-                  <div className={`relative grid lg:grid-cols-12 gap-8 lg:gap-14 items-center ${reverse ? 'lg:[&>*:first-child]:order-2' : ''}`}>
+                  <div className={`relative grid lg:grid-cols-12 gap-5 sm:gap-6 lg:gap-8 lg:gap-14 items-center ${reverse ? 'lg:[&>*:first-child]:order-2' : ''}`}>
 
                     {/* ======== 图片画廊 ======== */}
                     <div className="lg:col-span-7 relative">
-                      <div className="grid grid-cols-6 gap-3 md:gap-4">
+                      <div className="grid grid-cols-6 gap-2 sm:gap-3 md:gap-4">
                         {/* 主图 */}
-                        <div className="col-span-6 rounded-[28px] overflow-hidden ring-1 ring-[color:var(--color-ink-900)]/10 shadow-[0_30px_80px_-30px_rgba(15,26,45,0.4)] aspect-[16/10] relative group shine-sweep">
+                        <div className="col-span-6 rounded-[20px] sm:rounded-[28px] overflow-hidden ring-1 ring-[color:var(--color-ink-900)]/10 shadow-[0_30px_80px_-30px_rgba(15,26,45,0.4)] aspect-[16/10] relative group shine-sweep">
                           <img src={v.images[0]} alt={info.name} loading="lazy" decoding="async" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
                           {/* 渐变加深 + 延长中部渐变深度，保证底部品牌/现车标签在浅色车身上也清晰可读 */}
                           <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent" />
@@ -229,16 +229,16 @@ export default function Services() {
 
                     {/* ======== 文字信息 ======== */}
                     <div className="lg:col-span-5">
-                      <div className="font-mono text-xs text-[color:var(--color-amber-500)] tracking-[0.3em] mb-3">
+                      <div className="font-mono text-[11px] sm:text-xs text-[color:var(--color-amber-500)] tracking-[0.25em] sm:tracking-[0.3em] mb-2 sm:mb-3">
                         — MODÈLE {v.no} / {info.brand.toUpperCase()}
                       </div>
-                      <h3 className="font-display font-black text-3xl md:text-[44px] leading-[1.1] mb-5 tracking-tight">
+                      <h3 className="font-display font-black text-[24px] sm:text-3xl md:text-[44px] leading-[1.1] mb-4 sm:mb-5 tracking-tight">
                         {info.name}
                       </h3>
 
                       {/* 价格卡 */}
-                      <div className="relative mb-7 p-1 rounded-[22px] bg-gradient-to-br from-[color:var(--color-amber-500)] via-[color:var(--color-amber-500)]/60 to-[color:var(--color-ink-900)]/15 shadow-lg">
-                        <div className="rounded-[20px] bg-[color:var(--color-warm)] p-6 md:p-7 relative overflow-hidden">
+                      <div className="relative mb-5 sm:mb-7 p-1 rounded-[18px] sm:rounded-[22px] bg-gradient-to-br from-[color:var(--color-amber-500)] via-[color:var(--color-amber-500)]/60 to-[color:var(--color-ink-900)]/15 shadow-lg">
+                        <div className="rounded-[16px] sm:rounded-[20px] bg-[color:var(--color-warm)] p-4 sm:p-6 md:p-7 relative overflow-hidden">
                           <div className="absolute top-4 right-4 badge-ink-xs rotate-[5deg]">
                             {lang === 'zh' ? '参 考 价' : 'TARIF'}
                           </div>

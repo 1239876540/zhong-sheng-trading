@@ -66,33 +66,33 @@ export default function About() {
                 </div>
 
                 <h1 className="font-display text-white font-black leading-[0.95] tracking-tight">
-                  <span className="block text-[16px] md:text-[20px] font-bold text-[color:var(--color-amber-500)] mb-3 md:mb-5 tracking-[0.22em] uppercase">
+                  <span className="block text-[12px] sm:text-[16px] md:text-[20px] font-bold text-[color:var(--color-amber-500)] mb-2 sm:mb-3 md:mb-5 tracking-[0.18em] sm:tracking-[0.22em] uppercase">
                     MADAGASCAR · TOAMASINA II · ZONES INDUSTRIELLES
                   </span>
-                  <span className="block text-[44px] md:text-[68px] lg:text-[84px]">
+                  <span className="block text-[30px] sm:text-[44px] md:text-[68px] lg:text-[84px]">
                     {lang === 'zh' ? '关于' : 'À propos de'}
                   </span>
-                  <span className="block text-[48px] md:text-[76px] lg:text-[94px] text-transparent bg-clip-text"
+                  <span className="block text-[32px] sm:text-[48px] md:text-[76px] lg:text-[94px] text-transparent bg-clip-text mt-1"
                         style={{ backgroundImage: 'linear-gradient(90deg,#E8A400 0%,#F5F3EE 60%,#E8A400 100%)' }}>
                     {lang === 'zh' ? '中盛贸易' : 'ZHONG SHENG'}
                   </span>
                 </h1>
 
-                <p className="mt-8 md:mt-10 max-w-3xl text-[17px] md:text-[19px] leading-[1.85] text-white/80">
+                <p className="mt-5 sm:mt-8 md:mt-10 max-w-3xl text-[14px] sm:text-[17px] md:text-[19px] leading-[1.7] sm:leading-[1.85] text-white/80">
                   {t.about.desc}
                 </p>
 
                 {/* 一行信任数据 */}
-                <div className="mt-10 md:mt-14 grid grid-cols-3 max-w-2xl gap-3 md:gap-6">
+                <div className="mt-7 sm:mt-10 md:mt-14 grid grid-cols-3 max-w-2xl gap-2 sm:gap-3 md:gap-6">
                   {[
                     { k: lang === 'zh' ? '业务年限' : 'Années', v: '5+', sub: lang === 'zh' ? '本土深耕' : 'Local' },
                     { k: lang === 'zh' ? '合作客户' : 'Clients', v: '300+', sub: lang === 'zh' ? '全马覆盖' : 'National' },
                     { k: lang === 'zh' ? '仓储面积' : 'Surface', v: '2万㎡', sub: lang === 'zh' ? '标准园区' : 'Parc Pro' },
                   ].map((s, i) => (
-                    <div key={i} className="border-l-2 border-[color:var(--color-amber-500)]/70 pl-3 md:pl-5">
-                      <div className="text-xs md:text-sm text-white/50 mb-1">{s.k}</div>
-                      <div className="font-display font-black text-white text-[26px] md:text-[36px] leading-none">{s.v}</div>
-                      <div className="text-[11px] md:text-xs text-[color:var(--color-amber-500)]/90 mt-1.5 tracking-wider">{s.sub}</div>
+                    <div key={i} className="border-l-2 border-[color:var(--color-amber-500)]/70 pl-2 sm:pl-3 md:pl-5">
+                      <div className="text-[11px] sm:text-xs md:text-sm text-white/50 mb-0.5 sm:mb-1">{s.k}</div>
+                      <div className="font-display font-black text-white text-[20px] sm:text-[26px] md:text-[36px] leading-none">{s.v}</div>
+                      <div className="text-[10px] sm:text-[11px] md:text-xs text-[color:var(--color-amber-500)]/90 mt-1 tracking-wider">{s.sub}</div>
                     </div>
                   ))}
                 </div>

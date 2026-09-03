@@ -649,6 +649,155 @@ section { max-width: 100vw; overflow-x: hidden; }
 }
 
 /* ================================================================ */
+/*  移动端全局优化（Mobile First 增强）                              */
+/* ================================================================ */
+
+/* --- 小屏幕背景装饰降级 --- */
+@media (max-width: 640px) {
+  body::before {
+    background-size: 30px 30px, 30px 30px, 150px 150px, 150px 150px;
+    opacity: 0.35;
+  }
+  body::after {
+    opacity: 0.6;
+    filter: blur(20px) saturate(1.1);
+  }
+}
+
+/* --- 移动端 Hero 高度优化 --- */
+@media (max-width: 640px) {
+  section:first-of-type {
+    min-height: auto !important;
+    padding-bottom: 3rem !important;
+  }
+}
+
+/* --- 移动端按钮统一缩小 --- */
+@media (max-width: 640px) {
+  .btn {
+    padding: 12px 22px;
+    font-size: 14px;
+  }
+}
+
+/* --- 移动端 section 间距收窄 --- */
+@media (max-width: 640px) {
+  section {
+    padding-top: 3.5rem !important;
+    padding-bottom: 3.5rem !important;
+  }
+}
+
+/* --- 移动端首字母下沉缩小 --- */
+@media (max-width: 640px) {
+  .dropcap::first-letter {
+    font-size: 3rem;
+    margin-right: 0.4rem;
+    padding-top: 0.25rem;
+  }
+}
+
+/* --- 移动端隐藏超大装饰文字（避免溢出） --- */
+@media (max-width: 768px) {
+  .corner-number {
+    font-size: clamp(60px, 18vw, 120px) !important;
+  }
+}
+
+/* --- 移动端玻璃卡片内边距缩小 --- */
+@media (max-width: 640px) {
+  .glass-dark,
+  .glass-light {
+    backdrop-filter: blur(10px) saturate(130%);
+    -webkit-backdrop-filter: blur(10px) saturate(130%);
+  }
+}
+
+/* --- 移动端跑马灯速度加快 + 卡片缩小 --- */
+@media (max-width: 640px) {
+  .marquee {
+    animation-duration: 25s;
+  }
+}
+
+/* --- 移动端滚动条隐藏（更干净） --- */
+@media (max-width: 768px) {
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-thumb {
+    border-width: 1px;
+  }
+}
+
+/* --- 移动端图片懒加载占位优化 --- */
+@media (max-width: 640px) {
+  img {
+    content-visibility: auto;
+  }
+}
+
+/* --- 移动端安全区域适配（刘海屏/底部横条） --- */
+@supports (padding-top: env(safe-area-inset-top)) {
+  .fixed.top-0 {
+    top: env(safe-area-inset-top);
+  }
+}
+
+/* --- 移动端触控优化：防止长按选中 --- */
+@media (pointer: coarse) {
+  .tilt-lift,
+  .shine-sweep,
+  .btn,
+  .btn-ripple {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+  }
+  .tilt-lift:active {
+    transform: scale(0.98) !important;
+  }
+}
+
+/* --- 移动端文字渲染优化 --- */
+@media (max-width: 640px) {
+  body {
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+  }
+  .font-display {
+    letter-spacing: -0.01em;
+  }
+}
+
+/* --- 移动端 hr-heavy 缩短 --- */
+@media (max-width: 640px) {
+  .hr-heavy {
+    width: 80px;
+  }
+}
+
+/* --- 移动端 marquee 信任条高度缩小 --- */
+@media (max-width: 640px) {
+  .marquee > div {
+    min-width: 180px !important;
+    padding: 0.75rem 1rem !important;
+  }
+  .marquee .font-display {
+    font-size: 1.25rem !important;
+  }
+}
+
+/* --- 移动端 chip-skew 缩小 --- */
+@media (max-width: 640px) {
+  .chip-skew {
+    padding: 4px 10px 4px 12px;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+  }
+}
+
+/* ================================================================ */
 /*  A11Y · prefers-reduced-motion 全局降级（WCAG 2.2 AAA 合规）      */
 /* ================================================================ */
 @media (prefers-reduced-motion: reduce) {

@@ -28,28 +28,28 @@ export default function Footer() {
       </div>
       <div className="pointer-events-none absolute right-0 top-0 w-72 h-72 bg-[color:var(--color-amber-500)]/10 blur-3xl rounded-full -translate-y-1/2 translate-x-1/2" />
 
-      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-10 py-16 md:py-20 relative">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12">
+      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-10 py-12 sm:py-14 md:py-16 md:py-20 relative">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 sm:gap-10 lg:gap-12">
 
           {/* 公司栏 - 占 5 列 */}
-          <div className="lg:col-span-5">
+          <div className="md:col-span-2 lg:col-span-5 order-1">
             {/* LOGO */}
-            <Link to="/" className="flex items-center gap-4 mb-6" aria-label={t.common.companyFull}>
-              <span className="relative w-14 h-14 flex-shrink-0">
+            <Link to="/" className="flex items-center gap-3 sm:gap-4 mb-5 sm:mb-6" aria-label={t.common.companyFull}>
+              <span className="relative w-11 h-11 sm:w-14 sm:h-14 flex-shrink-0">
                 <span className="absolute inset-0 rounded-full border-2 border-white/80" aria-hidden="true" />
                 <span className="absolute -right-0.5 -bottom-0.5 w-[30%] h-[30%] rounded-tr-full rounded-bl-full bg-[color:var(--color-amber-500)]" aria-hidden="true" />
                 <img src={companyLogo} alt="" aria-hidden="true" className="absolute inset-1 rounded-full w-[calc(100%-8px)] h-[calc(100%-8px)] object-cover" />
               </span>
               <div>
-                <div className="font-display text-2xl font-extrabold tracking-tight">
+                <div className="font-display text-lg sm:text-2xl font-extrabold tracking-tight">
                   {lang === 'zh' ? t.common.companyFull : t.common.companyEn}
                 </div>
-                <div className="mt-1 text-[11px] tracking-[0.25em] uppercase text-white/40 font-semibold">
+                <div className="mt-0.5 sm:mt-1 text-[10px] sm:text-[11px] tracking-[0.25em] uppercase text-white/40 font-semibold">
                   {t.common.companyEn}
                 </div>
               </div>
             </Link>
-            <p className="text-[14.5px] leading-relaxed text-white/60 max-w-lg mb-7">
+            <p className="text-[13.5px] sm:text-[14.5px] leading-relaxed text-white/60 max-w-lg mb-5 sm:mb-7">
               {t.footer.intro}
             </p>
 
@@ -64,7 +64,7 @@ export default function Footer() {
           </div>
 
           {/* 导航 + 快速跳转 - 占 3 列 */}
-          <div className="lg:col-span-3">
+          <div className="lg:col-span-3 order-2 md:order-2">
             <h4 className="text-sm font-bold tracking-[0.16em] uppercase text-white/40 mb-6">
               {t.footer.quickNav}
             </h4>
@@ -92,7 +92,7 @@ export default function Footer() {
           </div>
 
           {/* 联系方式 - 占 4 列 */}
-          <div className="lg:col-span-4">
+          <div className="lg:col-span-4 order-3 md:order-3">
             <h4 className="text-sm font-bold tracking-[0.16em] uppercase text-white/40 mb-6">
               {t.footer.contact}
             </h4>

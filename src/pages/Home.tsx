@@ -150,17 +150,17 @@ export default function Home() {
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.2, duration: 0.5 }}
-                      className="block text-[16px] md:text-[20px] font-bold text-gradient-amber mb-3 md:mb-5 tracking-[0.28em] uppercase"
+                      className="block text-[12px] sm:text-[16px] md:text-[20px] font-bold text-gradient-amber mb-2 sm:mb-3 md:mb-5 tracking-[0.22em] sm:tracking-[0.28em] uppercase"
                     >
                       {lang === 'zh' ? 'MADAGASCAR · 马达加斯加' : 'MADAGASCAR · TOAMASINA II'}
                     </motion.span>
                     <StaggerWords
                       text={t.home.heroTitleLine1}
-                      className="block text-[46px] sm:text-[58px] md:text-[76px] lg:text-[94px]"
+                      className="block text-[32px] sm:text-[46px] md:text-[76px] lg:text-[94px]"
                     />
                     <StaggerWords
                       text={t.home.heroTitleLine2}
-                      className="block text-[38px] sm:text-[48px] md:text-[62px] lg:text-[80px] text-white/90 mt-2"
+                      className="block text-[26px] sm:text-[38px] md:text-[62px] lg:text-[80px] text-white/90 mt-1 sm:mt-2"
                     />
                   </h1>
 
@@ -168,7 +168,7 @@ export default function Home() {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 0.9, duration: 0.7 }}
-                    className="mt-6 md:mt-8 max-w-2xl text-white/75 text-[14px] md:text-[17px] leading-relaxed"
+                    className="mt-4 sm:mt-6 md:mt-8 max-w-xl sm:max-w-2xl text-white/75 text-[13px] sm:text-[14px] md:text-[17px] leading-relaxed"
                   >
                     {t.home.heroDesc}
                   </motion.p>
@@ -178,15 +178,15 @@ export default function Home() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 1, duration: 0.6 }}
-                    className="mt-8 md:mt-10 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 md:gap-4"
+                    className="mt-6 sm:mt-8 md:mt-10 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 md:gap-4"
                   >
                     <Link to="/services" onClick={setRipple}
-                          className="btn-ripple btn btn-amber pulse-ring">
+                          className="btn-ripple btn btn-amber pulse-ring text-sm sm:text-base">
                       {t.home.heroButtons.services}
                       <ChevronRight className="w-4 h-4 -mr-1" strokeWidth={3} />
                     </Link>
                     <Link to="/contact" onClick={setRipple}
-                          className="btn-ripple btn btn-outline !text-white !border-white/60 hover:!bg-white hover:!text-[color:var(--color-ink-900)]">
+                          className="btn-ripple btn btn-outline !text-white !border-white/60 hover:!bg-white hover:!text-[color:var(--color-ink-900)] text-sm sm:text-base">
                       <Phone className="w-4 h-4" strokeWidth={2.5} />
                       {t.home.heroButtons.contact}
                     </Link>
@@ -195,7 +195,7 @@ export default function Home() {
               </div>
 
               {/* stats 条 — 数字动画 */}
-              <div ref={statsRef} className="mt-10 md:mt-14 grid grid-cols-2 md:grid-cols-4 gap-y-6 gap-x-4 md:gap-x-8 max-w-4xl">
+              <div ref={statsRef} className="mt-8 sm:mt-10 md:mt-14 grid grid-cols-2 md:grid-cols-4 gap-y-4 gap-x-3 md:gap-x-8 max-w-4xl">
                 {stats.map((s, i) => {
                   const { n, suffix } = parseStat(s.value)
                   return (
@@ -205,17 +205,18 @@ export default function Home() {
                       whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true }}
                       transition={{ delay: 0.1 * i, duration: 0.6, ease: [0.2, 0.7, 0.2, 1] }}
-                      className="relative group glass-light !bg-white/60 !border-white/25 rounded-[22px] px-4 py-4 md:px-5 md:py-5 backdrop-blur-md"
+                      className="relative group glass-light !bg-white/60 !border-white/25 rounded-[18px] sm:rounded-[22px] px-3 sm:px-4 py-3 sm:py-4 md:px-5 md:py-5 backdrop-blur-md"
                     >
+                      {i > 0 && i < 2 && <span className="hidden sm:block md:hidden absolute -left-1.5 top-4 bottom-4 w-px bg-[color:var(--color-amber-500)]/30" />}
                       {i > 0 && <span className="hidden md:block absolute -left-4 top-5 bottom-5 w-px bg-[color:var(--color-amber-500)]/30" />}
-                      <div className="hero-counter text-[34px] md:text-[48px] leading-none bg-gradient-to-br from-white via-white to-[#FFD362] bg-clip-text text-transparent">
+                      <div className="hero-counter text-[26px] sm:text-[34px] md:text-[48px] leading-none bg-gradient-to-br from-white via-white to-[#FFD362] bg-clip-text text-transparent">
                         <Counter to={n} suffix={suffix} trigger={triggerCounters} duration={1800 + i * 150} />
                       </div>
-                      <div className="mt-2 text-[11px] md:text-[13px] text-white/70 tracking-wider font-semibold leading-snug">
+                      <div className="mt-1.5 sm:mt-2 text-[10px] sm:text-[11px] md:text-[13px] text-white/70 tracking-wider font-semibold leading-snug">
                         {s.label}
                       </div>
                       {/* data 条装饰 */}
-                      <div className="mt-3 bar-track h-[4px] !bg-white/10">
+                      <div className="mt-2 sm:mt-3 bar-track h-[3px] sm:h-[4px] !bg-white/10">
                         <div className="bar-fill" style={{ width: `${70 + (i % 3) * 10}%` }} />
                       </div>
                     </motion.div>
@@ -274,41 +275,41 @@ export default function Home() {
 
         {/* 底部滚动画廊: 5 张车型小图 */}
         <div className="relative max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-10 pb-10 -mt-2">
-          <div className="hidden md:grid grid-cols-5 gap-3 md:gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2 sm:gap-3 md:gap-4">
             {(['tractor6x4', 'dump6x4', 'light', 'van'] as VKey[]).map((k, i) => (
               <Link to="/services" key={k}
-                    className="group relative aspect-[5/4] overflow-hidden rounded-[18px] ring-1 ring-white/20 bg-[color:var(--color-ink-900)]/50 shine-sweep tilt-lift">
+                    className="group relative aspect-[5/4] overflow-hidden rounded-[14px] sm:rounded-[18px] ring-1 ring-white/20 bg-[color:var(--color-ink-900)]/50 shine-sweep tilt-lift">
                 <img src={vehicleImgs[k].main} alt={t.vehicles[k].name} loading="lazy" decoding="async" className="w-full h-full object-cover opacity-90 group-hover:scale-105 group-hover:opacity-100 transition-all duration-700" />
                 {/* 渐变加深 + 延长渐变黑覆盖到中部，保证底部长标题不被车图浅色背景淹没（对比度≥4.5:1） */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/55 to-transparent" />
                 {/* 底部内容内边距 16px（原 12px 太小，中文双行易贴边裁切） */}
-                <div className="absolute left-4 right-4 bottom-4">
-                  <div className="text-[10px] text-[color:var(--color-amber-500)] font-black tracking-[0.22em] uppercase mb-1">
+                <div className="absolute left-3 right-3 bottom-3 sm:left-4 sm:right-4 sm:bottom-4">
+                  <div className="text-[9px] sm:text-[10px] text-[color:var(--color-amber-500)] font-black tracking-[0.22em] uppercase mb-1">
                     FLEET · {String(i + 1).padStart(2, '0')}
                   </div>
                   {/* 中文长名（如"徐工漢風 G 7 6×4 自卸车（翻斗车）"）常需双行，所以 line-clamp-3 兜底 + 行高 1.35 */}
-                  <div className="text-white text-[12px] md:text-[14px] leading-[1.35] font-bold tracking-tight line-clamp-3">
+                  <div className="text-white text-[11px] sm:text-[12px] md:text-[14px] leading-[1.3] font-bold tracking-tight line-clamp-2 sm:line-clamp-3">
                     {t.vehicles[k].name}
                   </div>
                 </div>
               </Link>
             ))}
             {/* 第5张 官方合作 CTA */}
-            <Link to="/about" className="group relative aspect-[4/3] overflow-hidden rounded-[18px] ring-1 ring-white/20 bg-[color:var(--color-amber-500)] text-[color:var(--color-ink-900)] flex flex-col justify-between p-5 tilt-lift">
+            <Link to="/about" className="group relative aspect-[4/3] sm:aspect-[5/4] md:aspect-[4/3] overflow-hidden rounded-[14px] sm:rounded-[18px] ring-1 ring-white/20 bg-[color:var(--color-amber-500)] text-[color:var(--color-ink-900)] flex flex-col justify-between p-3 sm:p-4 md:p-5 tilt-lift">
               <div className="flex items-center justify-between">
-                <div className="text-[9px] font-black tracking-[0.22em] uppercase opacity-85">
+                <div className="text-[8px] sm:text-[9px] font-black tracking-[0.22em] uppercase opacity-85">
                   {t.home.coreBiz}
                 </div>
-                <Star className="w-4 h-4 fill-[color:var(--color-ink-900)]" />
+                <Star className="w-3 h-3 sm:w-4 sm:h-4 fill-[color:var(--color-ink-900)]" />
               </div>
-              <div className="corner-number" style={{ fontSize: '96px', right: '4px', bottom: '-8px' }}>ZS</div>
+              <div className="corner-number hidden sm:block" style={{ fontSize: '96px', right: '4px', bottom: '-8px' }}>ZS</div>
               <div className="relative">
-                <div className="font-display text-[22px] leading-tight font-black">
+                <div className="font-display text-[16px] sm:text-[18px] md:text-[22px] leading-tight font-black">
                   {t.common.companyShort}
                 </div>
-                <div className="mt-2 flex items-center gap-1 text-sm font-bold group-hover:gap-2 transition-all">
+                <div className="mt-1 sm:mt-2 flex items-center gap-1 text-xs sm:text-sm font-bold group-hover:gap-2 transition-all">
                   {lang === 'zh' ? '了解中盛' : 'About Zhong Sheng'}
-                  <ChevronRight className="w-4 h-4" strokeWidth={3} />
+                  <ChevronRight className="w-3 h-3 sm:w-4 sm:h-4" strokeWidth={3} />
                 </div>
               </div>
             </Link>
@@ -368,57 +369,57 @@ export default function Home() {
       {/* ========================================================= */}
       {/* 核心业务 4 卡片 · 加港航船尾迹纹 bg-wake（贴合"货物流转"语义） */}
       {/* ========================================================= */}
-      <section className="relative py-20 md:py-28 bg-wake">
+      <section className="relative py-14 sm:py-16 md:py-20 lg:py-28 bg-wake">
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-10">
           {/* 标题 */}
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-12 md:mb-16">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8 sm:mb-10 md:mb-16">
             <div>
-              <div className="text-[11px] tracking-[0.28em] uppercase text-[color:var(--color-ink-500)] font-black mb-4">
+              <div className="text-[10px] sm:text-[11px] tracking-[0.28em] uppercase text-[color:var(--color-ink-500)] font-black mb-3 sm:mb-4">
                 {lang === 'zh' ? 'CORE BUSINESS · N° 02' : 'CORE BUSINESS · SECTION 02'}
               </div>
-              <h2 className="font-display text-[38px] md:text-[52px] font-black leading-[1.05] tracking-tight max-w-2xl">
+              <h2 className="font-display text-[28px] sm:text-[32px] md:text-[52px] font-black leading-[1.05] tracking-tight max-w-2xl">
                 {t.home.coreBiz}
-                <span className="block text-[color:var(--color-ink-500)] text-[20px] md:text-[24px] font-bold mt-2 tracking-normal">
+                <span className="block text-[color:var(--color-ink-500)] text-[16px] sm:text-[18px] md:text-[24px] font-bold mt-1 sm:mt-2 tracking-normal">
                   {t.home.coreBizDesc}
                 </span>
               </h2>
-              <span className="hr-heavy mt-5" />
+              <span className="hr-heavy mt-4 sm:mt-5" />
             </div>
-            <Link to="/services" className="btn btn-primary self-start md:self-end">
+            <Link to="/services" className="btn btn-primary self-start md:self-end text-sm sm:text-base !py-3 sm:!py-[14px]">
               {t.common.learnMore}
               <ChevronRight className="w-4 h-4" strokeWidth={2.5} />
             </Link>
           </div>
 
           {/* 4 卡片 2x2 */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5 md:gap-6">
             {services2x2.map((s) => (
               <Link
                 to={s.to}
                 key={s.no}
-                className="group tilt-lift card-paper p-6 md:p-8 flex gap-5 md:gap-6 transition-all"
+                className="group tilt-lift card-paper p-4 sm:p-5 md:p-8 flex gap-4 sm:gap-5 md:gap-6 transition-all"
               >
                 {/* 左编号+图标 */}
-                <div className="flex flex-col items-center gap-3">
-                  <div className="text-[11px] font-mono font-black text-[color:var(--color-ink-400)] tracking-widest">
+                <div className="flex flex-col items-center gap-2 sm:gap-3">
+                  <div className="text-[10px] sm:text-[11px] font-mono font-black text-[color:var(--color-ink-400)] tracking-widest">
                     — {s.no} —
                   </div>
-                  <div className="relative w-14 h-14 md:w-16 md:h-16 flex-shrink-0">
+                  <div className="relative w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 flex-shrink-0">
                     <div className="absolute inset-0 border border-[color:var(--color-ink-900)]" />
                     <div className="absolute top-1.5 right-1.5 left-1.5 bottom-1.5 bg-[color:var(--color-ink-900)] flex items-center justify-center transition-colors group-hover:bg-[color:var(--color-amber-500)]">
-                      <s.icon className="w-7 h-7 md:w-8 md:h-8 text-white group-hover:text-[color:var(--color-ink-900)] transition-colors" strokeWidth={1.8} />
+                      <s.icon className="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8 text-white group-hover:text-[color:var(--color-ink-900)] transition-colors" strokeWidth={1.8} />
                     </div>
                   </div>
                 </div>
                 {/* 右内容 */}
                 <div className="flex-1 min-w-0">
-                  <h3 className="font-display text-xl md:text-2xl font-black text-[color:var(--color-ink-900)] group-hover:text-[color:var(--color-amber-600)] transition-colors">
+                  <h3 className="font-display text-lg sm:text-xl md:text-2xl font-black text-[color:var(--color-ink-900)] group-hover:text-[color:var(--color-amber-600)] transition-colors">
                     {s.title}
                   </h3>
-                  <p className="mt-3 text-[14px] md:text-[15px] text-[color:var(--color-ink-600)] leading-relaxed">
+                  <p className="mt-2 sm:mt-3 text-[13px] sm:text-[14px] md:text-[15px] text-[color:var(--color-ink-600)] leading-relaxed">
                     {s.desc}
                   </p>
-                  <div className="mt-5 text-[13px] font-bold text-[color:var(--color-ink-900)] flex items-center gap-2 group-hover:text-[color:var(--color-amber-600)] transition-colors">
+                  <div className="mt-3 sm:mt-5 text-[12px] sm:text-[13px] font-bold text-[color:var(--color-ink-900)] flex items-center gap-2 group-hover:text-[color:var(--color-amber-600)] transition-colors">
                     {t.common.seeMore}
                   </div>
                 </div>
@@ -431,30 +432,30 @@ export default function Home() {
       {/* ========================================================= */}
       {/* 精品车型 : 主推4款大图展示                               */}
       {/* ========================================================= */}
-      <section className="relative py-20 md:py-28 bg-[color:var(--color-ink-900)] text-white overflow-hidden">
-        <div className="pointer-events-none absolute -right-20 top-40 font-display text-[320px] leading-none font-black text-white/[0.04] select-none">
+      <section className="relative py-14 sm:py-16 md:py-20 lg:py-28 bg-[color:var(--color-ink-900)] text-white overflow-hidden">
+        <div className="pointer-events-none absolute -right-20 top-40 font-display text-[200px] sm:text-[320px] leading-none font-black text-white/[0.04] select-none">
           FLEET
         </div>
 
         <div className="relative max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-10">
-          <div className="text-[11px] tracking-[0.28em] uppercase text-[color:var(--color-amber-500)] font-black mb-4">
+          <div className="text-[10px] sm:text-[11px] tracking-[0.28em] uppercase text-[color:var(--color-amber-500)] font-black mb-3 sm:mb-4">
             {lang === 'zh' ? 'FEATURED VEHICLES · N° 03' : 'FEATURED VEHICLES · SECTION 03'}
           </div>
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-12 md:mb-16">
-            <h2 className="font-display text-[38px] md:text-[52px] font-black leading-[1.05] tracking-tight">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8 sm:mb-10 md:mb-16">
+            <h2 className="font-display text-[28px] sm:text-[32px] md:text-[52px] font-black leading-[1.05] tracking-tight">
               {t.home.vehicleTitle}
-              <span className="block text-white/50 text-[20px] md:text-[24px] font-bold mt-2 tracking-normal">
+              <span className="block text-white/50 text-[16px] sm:text-[18px] md:text-[24px] font-bold mt-1 sm:mt-2 tracking-normal">
                 {t.home.vehicleDesc}
               </span>
             </h2>
-            <Link to="/services" className="btn btn-amber self-start">
+            <Link to="/services" className="btn btn-amber self-start text-sm sm:text-base !py-3 sm:!py-[14px]">
               {t.home.vehicleCta}
               <ChevronRight className="w-4 h-4" strokeWidth={2.5} />
             </Link>
           </div>
 
           {/* 2 列车型大图卡 */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 md:gap-8">
             {showVehicles.map((k, idx) => {
               const v = t.vehicles[k]
               const img = vehicleImgs[k].main
@@ -465,60 +466,60 @@ export default function Home() {
                   className={`group relative block bg-black overflow-hidden border border-white/10 shine-sweep ${
                     idx === 0 ? 'lg:aspect-[4/3.6]' : ''
                   }`}
-                  style={{ aspectRatio: idx === 0 ? undefined : undefined, minHeight: idx === 0 ? '520px' : '440px' }}
+                  style={{ aspectRatio: idx === 0 ? undefined : undefined, minHeight: idx === 0 ? '380px' : '340px', minWidth: '0' }}
                 >
                   <img src={img} alt={v.name} loading="lazy" decoding="async" className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-black/10" />
 
                   {/* 左上编号 */}
-                  <div className="absolute top-5 left-5 flex items-center gap-3">
-                    <span className="badge-ink !bg-white/10 backdrop-blur-sm !border !border-white/20 !text-white !rounded-none !p-2 text-[10px] font-black tracking-[0.3em]">
+                  <div className="absolute top-3 sm:top-5 left-3 sm:left-5 flex items-center gap-2 sm:gap-3">
+                    <span className="badge-ink !bg-white/10 backdrop-blur-sm !border !border-white/20 !text-white !rounded-none !p-1.5 sm:!p-2 text-[9px] sm:text-[10px] font-black tracking-[0.3em]">
                       {String(idx + 1).padStart(2, '0')} / 04
                     </span>
-                    <span className="badge-ink !bg-[color:var(--color-amber-500)] !text-[color:var(--color-ink-900)] !rounded-none !p-2 text-[10px] font-black tracking-[0.2em]">
+                    <span className="badge-ink !bg-[color:var(--color-amber-500)] !text-[color:var(--color-ink-900)] !rounded-none !p-1.5 sm:!p-2 text-[9px] sm:text-[10px] font-black tracking-[0.2em]">
                       {v.tag}
                     </span>
                   </div>
 
                   {/* 右下价格 tag */}
-                  <div className="absolute top-5 right-5 price-tag text-[14px] md:text-[16px]">
+                  <div className="absolute top-3 sm:top-5 right-3 sm:right-5 price-tag text-[12px] sm:text-[14px] md:text-[16px]">
                     {v.priceShort}
                   </div>
 
                   {/* 底部内容 */}
-                  <div className="absolute inset-x-0 bottom-0 p-6 md:p-8">
-                    <div className="text-[11px] uppercase tracking-[0.2em] text-white/50 font-bold mb-2">
+                  <div className="absolute inset-x-0 bottom-0 p-4 sm:p-6 md:p-8">
+                    <div className="text-[10px] sm:text-[11px] uppercase tracking-[0.2em] text-white/50 font-bold mb-1 sm:mb-2">
                       {v.brand}
                     </div>
                     {/* 中文长名如"徐工漢風 G 7 6×4 自卸车（翻斗车）"双行：line-clamp-3 保底 + 行高 1.15→1.2 */}
-                    <h3 className="font-display text-[24px] md:text-[30px] lg:text-[32px] font-black text-white leading-[1.2] tracking-tight line-clamp-3">
+                    <h3 className="font-display text-[20px] sm:text-[24px] md:text-[30px] lg:text-[32px] font-black text-white leading-[1.2] tracking-tight line-clamp-2 sm:line-clamp-3">
                       {v.name}
                     </h3>
                     {/* specs 4 格 */}
-                    <div className="mt-4 grid grid-cols-2 gap-2 max-w-md">
+                    <div className="mt-3 sm:mt-4 grid grid-cols-2 gap-1.5 sm:gap-2 max-w-md">
                       {v.specs.slice(0, 4).map((s) => (
-                        <div key={s} className="px-3 py-1.5 text-[12px] md:text-[13px] text-white/80 border border-white/15 bg-white/[0.04]">
+                        <div key={s} className="px-2 sm:px-3 py-1 sm:py-1.5 text-[11px] sm:text-[12px] md:text-[13px] text-white/80 border border-white/15 bg-white/[0.04]">
                           {s}
                         </div>
                       ))}
                     </div>
-                    <div className="mt-5 flex items-center justify-between">
-                      <div className="text-[13px] text-[color:var(--color-amber-500)] font-bold">
+                    <div className="mt-3 sm:mt-5 flex items-center justify-between">
+                      <div className="text-[12px] sm:text-[13px] text-[color:var(--color-amber-500)] font-bold">
                         {v.highlight}
                       </div>
-                      <div className="text-sm font-bold text-white/80 flex items-center gap-1 group-hover:text-[color:var(--color-amber-500)] group-hover:gap-2 transition-all">
+                      <div className="text-xs sm:text-sm font-bold text-white/80 flex items-center gap-1 group-hover:text-[color:var(--color-amber-500)] group-hover:gap-2 transition-all">
                         {t.home.vehicleConsult}
                       </div>
                     </div>
                     {/* 库存进度条 */}
-                    <div className="mt-5 space-y-1.5">
-                      <div className="flex items-center justify-between text-[11px] font-bold tracking-wider">
+                    <div className="mt-3 sm:mt-5 space-y-1 sm:space-y-1.5">
+                      <div className="flex items-center justify-between text-[10px] sm:text-[11px] font-bold tracking-wider">
                         <span className="text-white/50 uppercase">{lang === 'zh' ? '现车库存' : 'IN STOCK'}</span>
                         <span className="text-[color:var(--color-amber-500)] font-mono">
                           {idx === 0 ? '12 / 15' : idx === 1 ? '8 / 10' : idx === 2 ? '18 / 20' : '6 / 8'}
                         </span>
                       </div>
-                      <div className="bar-track" style={{ background: 'rgba(255,255,255,0.1)' }}>
+                      <div className="bar-track h-[3px] sm:h-[6px]" style={{ background: 'rgba(255,255,255,0.1)' }}>
                         <div className="bar-fill" style={{
                           width: idx === 0 ? '80%' : idx === 1 ? '80%' : idx === 2 ? '90%' : '75%'
                         }} />
@@ -535,35 +536,35 @@ export default function Home() {
       {/* ========================================================= */}
       {/* 为什么选中盛: 纸面卡片 + 4理由 + 信任三连                 */}
       {/* ========================================================= */}
-      <section className="relative py-20 md:py-28">
+      <section className="relative py-14 sm:py-16 md:py-20 lg:py-28">
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-10">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10">
             {/* 左 5 列 标题+图 */}
             <div className="lg:col-span-5">
-              <div className="text-[11px] tracking-[0.28em] uppercase text-[color:var(--color-ink-500)] font-black mb-4">
+              <div className="text-[10px] sm:text-[11px] tracking-[0.28em] uppercase text-[color:var(--color-ink-500)] font-black mb-3 sm:mb-4">
                 {lang === 'zh' ? 'WHY US · N° 04' : 'WHY ZHONG SHENG'}
               </div>
-              <h2 className="font-display text-[38px] md:text-[48px] font-black leading-[1.05] tracking-tight">
+              <h2 className="font-display text-[28px] sm:text-[32px] md:text-[48px] font-black leading-[1.05] tracking-tight">
                 {t.home.whyTitle}
               </h2>
-              <span className="hr-heavy mt-5" />
-              <p className="mt-6 text-[15px] md:text-[16px] text-[color:var(--color-ink-600)] leading-relaxed">
+              <span className="hr-heavy mt-4 sm:mt-5" />
+              <p className="mt-4 sm:mt-6 text-[14px] sm:text-[15px] md:text-[16px] text-[color:var(--color-ink-600)] leading-relaxed">
                 {t.home.whyDesc}
               </p>
 
               {/* 信任三连 */}
-              <div className="mt-8 grid grid-cols-3 gap-3">
+              <div className="mt-6 sm:mt-8 grid grid-cols-3 gap-2 sm:gap-3">
                 {[
                   { icon: Shield, t: lang === 'zh' ? '正规实体' : 'Registered', s: lang === 'zh' ? '资质齐全' : 'Legal' },
                   { icon: Star, t: lang === 'zh' ? '诚信经营' : 'Integrity', s: lang === 'zh' ? '多年口碑' : 'Reputation' },
                   { icon: Award, t: lang === 'zh' ? '官方渠道' : 'Authorized', s: lang === 'zh' ? '品质保障' : 'Quality' },
                 ].map((b, i) => (
-                  <div key={i} className="card-paper p-4 text-center">
-                    <div className="mx-auto w-10 h-10 flex items-center justify-center bg-[color:var(--color-amber-500)] text-[color:var(--color-ink-900)]">
-                      <b.icon className="w-5 h-5" strokeWidth={2.2} />
+                  <div key={i} className="card-paper p-3 sm:p-4 text-center">
+                    <div className="mx-auto w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center bg-[color:var(--color-amber-500)] text-[color:var(--color-ink-900)]">
+                      <b.icon className="w-4 h-4 sm:w-5 sm:h-5" strokeWidth={2.2} />
                     </div>
-                    <div className="mt-3 font-bold text-[13px] text-[color:var(--color-ink-900)]">{b.t}</div>
-                    <div className="text-[11px] text-[color:var(--color-ink-500)] mt-1">{b.s}</div>
+                    <div className="mt-2 sm:mt-3 font-bold text-[12px] sm:text-[13px] text-[color:var(--color-ink-900)]">{b.t}</div>
+                    <div className="text-[10px] sm:text-[11px] text-[color:var(--color-ink-500)] mt-0.5 sm:mt-1 leading-tight">{b.s}</div>
                   </div>
                 ))}
               </div>
@@ -575,15 +576,15 @@ export default function Home() {
                 {/* 时间轴淡灰竖线（贯穿 4 条理由） */}
                 <span className="absolute left-3 md:left-4 top-2 bottom-2 w-px bg-[color:var(--color-ink-200)]" />
 
-                <div className="space-y-4">
+                <div className="space-y-3 sm:space-y-4">
                   {t.home.whyPoints.map((p, i) => (
-                    <div key={i} className="relative pl-11 md:pl-14">
+                    <div key={i} className="relative pl-10 sm:pl-11 md:pl-14">
                       {/* 数字圈 */}
-                      <span className="absolute left-0 top-1 w-7 h-7 md:w-8 md:h-8 rounded-full border border-[color:var(--color-ink-900)] bg-[color:var(--color-warm)] flex items-center justify-center">
-                        <span className="font-display font-black text-[14px]">{i + 1}</span>
+                      <span className="absolute left-0 top-1 w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 rounded-full border border-[color:var(--color-ink-900)] bg-[color:var(--color-warm)] flex items-center justify-center">
+                        <span className="font-display font-black text-[12px] sm:text-[14px]">{i + 1}</span>
                       </span>
-                      <div className="card-paper p-5 md:p-6 hover:-translate-y-0.5 transition-transform">
-                        <p className="text-[14.5px] md:text-[15.5px] text-[color:var(--color-ink-800)] leading-relaxed font-medium">
+                      <div className="card-paper p-4 sm:p-5 md:p-6 hover:-translate-y-0.5 transition-transform">
+                        <p className="text-[13.5px] sm:text-[14.5px] md:text-[15.5px] text-[color:var(--color-ink-800)] leading-relaxed font-medium">
                           {p}
                         </p>
                       </div>
@@ -593,26 +594,26 @@ export default function Home() {
               </div>
 
               {/* 双语&到岗 承诺 */}
-              <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-3">
-                <div className="card-paper p-5 flex items-center gap-4">
-                  <Languages className="w-8 h-8 text-[color:var(--color-amber-600)]" strokeWidth={1.8} />
+              <div className="mt-6 sm:mt-8 grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-3">
+                <div className="card-paper p-3 sm:p-5 flex items-center gap-3 sm:gap-4">
+                  <Languages className="w-6 h-6 sm:w-8 sm:h-8 text-[color:var(--color-amber-600)]" strokeWidth={1.8} />
                   <div>
-                    <div className="font-bold text-[color:var(--color-ink-900)] text-sm">中 / 法 双语</div>
-                    <div className="text-xs text-[color:var(--color-ink-500)] mt-0.5">{lang === 'zh' ? '沟通零障碍' : 'Bilingual service'}</div>
+                    <div className="font-bold text-[color:var(--color-ink-900)] text-xs sm:text-sm">{lang === 'zh' ? '中 / 法 双语' : 'Bilingual'}</div>
+                    <div className="text-[10px] sm:text-xs text-[color:var(--color-ink-500)] mt-0.5">{lang === 'zh' ? '沟通零障碍' : 'Bilingual service'}</div>
                   </div>
                 </div>
-                <div className="card-paper p-5 flex items-center gap-4">
-                  <CalendarCheck className="w-8 h-8 text-[color:var(--color-amber-600)]" strokeWidth={1.8} />
+                <div className="card-paper p-3 sm:p-5 flex items-center gap-3 sm:gap-4">
+                  <CalendarCheck className="w-6 h-6 sm:w-8 sm:h-8 text-[color:var(--color-amber-600)]" strokeWidth={1.8} />
                   <div>
-                    <div className="font-bold text-[color:var(--color-ink-900)] text-sm">{lang === 'zh' ? '到店看车' : 'On-site visit'}</div>
-                    <div className="text-xs text-[color:var(--color-ink-500)] mt-0.5">{lang === 'zh' ? '可实地考察' : 'Visit us anytime'}</div>
+                    <div className="font-bold text-[color:var(--color-ink-900)] text-xs sm:text-sm">{lang === 'zh' ? '到店看车' : 'On-site visit'}</div>
+                    <div className="text-[10px] sm:text-xs text-[color:var(--color-ink-500)] mt-0.5">{lang === 'zh' ? '可实地考察' : 'Visit us anytime'}</div>
                   </div>
                 </div>
-                <div className="card-paper p-5 flex items-center gap-4">
-                  <Globe className="w-8 h-8 text-[color:var(--color-amber-600)]" strokeWidth={1.8} />
+                <div className="card-paper p-3 sm:p-5 flex items-center gap-3 sm:gap-4">
+                  <Globe className="w-6 h-6 sm:w-8 sm:h-8 text-[color:var(--color-amber-600)]" strokeWidth={1.8} />
                   <div>
-                    <div className="font-bold text-[color:var(--color-ink-900)] text-sm">{lang === 'zh' ? '本地服务' : 'Local in MG'}</div>
-                    <div className="text-xs text-[color:var(--color-ink-500)] mt-0.5">{lang === 'zh' ? '塔马塔夫园区' : 'Toamasina II'}</div>
+                    <div className="font-bold text-[color:var(--color-ink-900)] text-xs sm:text-sm">{lang === 'zh' ? '本地服务' : 'Local in MG'}</div>
+                    <div className="text-[10px] sm:text-xs text-[color:var(--color-ink-500)] mt-0.5">{lang === 'zh' ? '塔马塔夫园区' : 'Toamasina II'}</div>
                   </div>
                 </div>
               </div>
@@ -627,24 +628,24 @@ export default function Home() {
       <section className="relative bg-[color:var(--color-amber-500)] text-[color:var(--color-ink-900)] overflow-hidden">
         <div className="absolute inset-0 opacity-10 pointer-events-none"
              style={{ backgroundImage: `url(${warehouseGate})`, backgroundSize: 'cover', backgroundPosition: 'center' }} />
-        <div className="relative max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-10 py-16 md:py-20 flex flex-col md:flex-row md:items-center md:justify-between gap-8">
+        <div className="relative max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-10 py-12 sm:py-14 md:py-16 lg:py-20 flex flex-col md:flex-row md:items-center md:justify-between gap-6 sm:gap-8">
           <div>
-            <div className="text-[11px] tracking-[0.3em] uppercase font-black opacity-70 mb-3">
+            <div className="text-[10px] sm:text-[11px] tracking-[0.3em] uppercase font-black opacity-70 mb-2 sm:mb-3">
               {lang === 'zh' ? 'GET IN TOUCH · CONTACT' : 'CONTACTEZ-NOUS'}
             </div>
-            <h2 className="font-display text-[30px] md:text-[40px] font-black leading-tight max-w-3xl">
+            <h2 className="font-display text-[24px] sm:text-[28px] md:text-[40px] font-black leading-tight max-w-3xl">
               {t.home.ctaTitle}
             </h2>
-            <p className="mt-3 text-[15px] md:text-[17px] opacity-80 font-medium">
+            <p className="mt-2 sm:mt-3 text-[13px] sm:text-[15px] md:text-[17px] opacity-80 font-medium">
               {t.home.ctaDesc}
             </p>
           </div>
-          <div className="flex flex-col sm:flex-row items-stretch gap-3">
-            <a href={`tel:${t.contact.phones[0].tel}`} className="btn btn-primary">
+          <div className="flex flex-col sm:flex-row items-stretch gap-2 sm:gap-3">
+            <a href={`tel:${t.contact.phones[0].tel}`} className="btn btn-primary text-sm sm:text-base !py-3 sm:!py-[14px] justify-center">
               <Phone className="w-4 h-4" strokeWidth={2.5} />
               {t.common.hotline} · {t.contact.phones[0].display}
             </a>
-            <Link to="/contact" className="btn btn-outline !text-[color:var(--color-ink-900)] !border-[color:var(--color-ink-900)] hover:!bg-[color:var(--color-ink-900)] hover:!text-white">
+            <Link to="/contact" className="btn btn-outline !text-[color:var(--color-ink-900)] !border-[color:var(--color-ink-900)] hover:!bg-[color:var(--color-ink-900)] hover:!text-white text-sm sm:text-base !py-3 sm:!py-[14px] justify-center">
               {t.common.contactNow}
               <ChevronRight className="w-4 h-4" strokeWidth={2.5} />
             </Link>
